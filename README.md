@@ -11,7 +11,7 @@ Specific Task 2: https://github.com/Akshit17/Diffusion-model-for-Quark-Gluon-Jet
 Applying for :- “Diffusion Models for Fast Detector Simulation” project
 
 ---
-## Jet event images reconstruction
+## Jet events reconstruction
 
 #change this intro part as already written in VAE task
 The accurate and efficient simulation of particle physics processes is crucial for the high-energy physics community, as simulating particle interactions in the detector is time-consuming and computationally expensive.  Jet event images reconstruction is needed to pave the way for full detector level fast simulation, as it can potentailly provide effective reconstruction of LHC events on the level of calorimeter deposits and tracks. 
@@ -37,6 +37,23 @@ Each image is 125x125 consisting of three channels Track, ECAL and HCAL respecti
 #### Backward Process :-
 
 ![](.PNG?raw=true)
+
+
+## Discussion
+
+* As dataset images contain physical data rather than RGB values seen in classical images, data preprocessing steps need to be carefully chosen to ensure that the physical properties of the data are not lost during the conversion process. For example, in our case, we had to be careful in scaling the pixel values to avoid losing the relative important features of the image.
+
+*  Given the challenges with using classical image representations for physical data of quark/gluon jet events, alternative representations such as point clouds can be considered which can capture the spatial relationships between the points in a more natural way. 
+
+*  Choice of beta scheduler is crucial, we used linear beta schedule and adjusted start and end values as per manual inspection of step wise forward processed images.
+
+*  Another challenge was in visualizing the intermediate images generated at each step of the diffusion process. Normalization techniques had to be carefully choosen to obtain clear and informative visualizations.
+
+*  For comparison of original and reconstructed events evaluation metrics like structural similarity index (SSIM), or peak signal-to-noise ratio (PSNR) can be used however in my case backward process didnt generate meaningful representations.
+
+*  Further exploration and optimization to achieve high-quality diffusion models for physical data of quark/gluon represented as images is needed. More research is required to investigate different diffusion schedules, data pre-processing techniques, and other model architectures that can better capture the underlying features of the data.
+
+
 
 
 

@@ -13,10 +13,9 @@ Applying for :- “Diffusion Models for Fast Detector Simulation” project
 ---
 ## Jet events reconstruction
 
-#change this intro part as already written in VAE task
 The accurate and efficient simulation of particle physics processes is crucial for the high-energy physics community, as simulating particle interactions in the detector is time-consuming and computationally expensive.  Jet event images reconstruction is needed to pave the way for full detector level fast simulation, as it can potentailly provide effective reconstruction of LHC events on the level of calorimeter deposits and tracks. 
 
-#give bit background about diffusion models here
+For this particular task Diffusion model was used. Diffusion models are a type of generative models that work by destroying training data by adding noise and learn to recover the data by reversing this noising process. They have proved to be good at capturing the underlying structure of complex data like image and audio. The process of diffusion can be thought of as two steps: a forward process and a backward process. In the forward process, the model takes the input image and gradually "blurs" it to generate a series of new images until it becomes completely unrecognizable. In the backward process, the model takes the last image in the series (which is completely unrecognizable i.e pure noise) and gradually "unblurs" it to generate a series of new images that become progressively clearer. The goal of the backward process is to generate an image that is as close to the original input image as possible. 
 
 ---
 ## Dataset
@@ -32,11 +31,19 @@ Each image is 125x125 consisting of three channels Track, ECAL and HCAL respecti
 
 #### Forward Process :-
 
-![](.PNG?raw=true)
+The forward process of diffusion models can be thought of as a Markov chain, where the current state depends only on the previous state. In this case, the current state is the image at time t, denoted as x_t, and the previous state is the image at time t-1, denoted as x_{t-1}. Each image at step t would be progressively more noisy than image at step t-1, determined by the new mean and variance using this equation :-  
+
+![t-1_image](.PNG?raw=true)
+
+Noisy version of image for specific time t can also be calculated by pre calculating closed form of mean and variance based on cummulative variance schedules which boils above equation to this :-
+
+![image](.PNG?raw=true)
 
 #### Backward Process :-
 
 ![](.PNG?raw=true)
+
+∇_θ log p(x_t | θ) = ∑_{i=t}^{t_0} E[∇_θ log q(x_i | x_{i+1}, θ)] + ∇_θ log p(x_{t_0} | θ)
 
 
 ## Discussion
@@ -53,10 +60,15 @@ Each image is 125x125 consisting of three channels Track, ECAL and HCAL respecti
 
 *  Further exploration and optimization to achieve high-quality diffusion models for physical data of quark/gluon represented as images is needed. More research is required to investigate different diffusion schedules, data pre-processing techniques, and other model architectures that can better capture the underlying features of the data.
 
+## References
 
+* Denoising Diffusion Probabilistic Models :- https://arxiv.org/pdf/2006.11239.pdf
 
+*  https://github.com/lucidrains/denoising-diffusion-pytorch
 
+*  https://colab.research.google.com/github/huggingface/notebooks/blob/main/examples/annotated_diffusion.ipynb#scrollTo=a30368b2
 
+*  https://medium.com/mlearning-ai/enerating-images-with-ddpms-a-pytorch-implementation-cef5a2ba8cb1
 
 
 
